@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $featuredCourses = App\Courses::take(3)->latest()->get();
+    return view('home', compact('featuredCourses'));
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/courses', 'CoursesController@index')->name('courses.index');
+Route::get('/course/{course}', 'CoursesController@show')->name('courses.show');
