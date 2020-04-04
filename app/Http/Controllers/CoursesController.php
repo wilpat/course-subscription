@@ -45,9 +45,9 @@ class CoursesController extends Controller
      * @param  \App\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function show(Courses $courses)
+    public function show(Courses $course)
     {
-        //
+        return view('courses.course.show', compact('course'));
     }
 
     /**
@@ -79,8 +79,20 @@ class CoursesController extends Controller
      * @param  \App\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Courses $courses)
+    public function destroy(Courses $course)
     {
         //
+    }
+
+    /**
+     * Display an episode of this course
+     *
+     * @param  \App\Courses  $courses
+     * @return \Illuminate\Http\Response
+     */
+    public function episode(Courses $course, $episodeNumber)
+    {
+        $video = $course->videos()->where('episode_number', $episodeNumber)->first();
+        return view('courses.course.episode', compact('course', 'video'));
     }
 }
