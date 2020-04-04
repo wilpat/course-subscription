@@ -18,6 +18,7 @@ Vue.use(BootstrapVue);
 
 Vue.component('pricing', require('./components/Pricing.vue').default);
 Vue.component('episode', require('./components/Episode.vue').default);
+Vue.component('video-player', require('./components/VideoPlayer.vue').default);
 
 
 const app = new Vue({
