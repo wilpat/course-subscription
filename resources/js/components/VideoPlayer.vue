@@ -8,20 +8,17 @@
 import Player from '@vimeo/player';
 export default {
     props: {
-        video: {
-            type: Object,
-            description: 'The video of an episode'
-        },
-        nextVideoUrl: String
+        vimeoVideoId: Number,
+        nextEpisodeUrl: String
     },
     mounted() {
         const options = {
-            id: this.video.vimeo_video_id,
+            id: this.vimeoVideoId
         };
 
         var player = new Player('course-player', options);
         player.on('ended', () =>{{
-            window.location = this.nextVideoUrl;
+            window.location = this.nextEpisodeUrl;
         }})
     }
 }

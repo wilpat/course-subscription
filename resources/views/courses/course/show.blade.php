@@ -16,7 +16,7 @@
 
         <section class="mb-5">
             <h3 class="mb-3 text-center">Episodes</h3>
-            <episode :videos="{{ $course->videos }}"></episode>
+            <episode :episodes="{{ $course->episodes }}"></episode>
         </section>
     </b-container>
 @endsection

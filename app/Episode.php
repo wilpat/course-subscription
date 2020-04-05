@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model
+class Episode extends Model
 {
     protected $appends = ['url'];
 
     public function course()
     {
-        return $this->belongsTo(Courses::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function getUrlAttribute() {

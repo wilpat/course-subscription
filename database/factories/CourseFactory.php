@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Courses;
+use App\Course;
 use Faker\Generator as Faker;
 
-$factory->define(Courses::class, function (Faker $faker) {
+$factory->define(Course::class, function (Faker $faker) {
     return [
         'title' => $faker->colorName,
         'description' => $faker->paragraph

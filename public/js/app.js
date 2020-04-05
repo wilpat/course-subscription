@@ -4082,9 +4082,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    videos: {
+    episodes: {
       type: Array,
-      description: 'The episode videos of this course'
+      description: 'The episodes of this course'
     }
   }
 });
@@ -4199,22 +4199,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    video: {
-      type: Object,
-      description: 'The video of an episode'
-    },
-    nextVideoUrl: String
+    vimeoVideoId: Number,
+    nextEpisodeUrl: String
   },
   mounted: function mounted() {
     var _this = this;
 
     var options = {
-      id: this.video.vimeo_video_id
+      id: this.vimeoVideoId
     };
     var player = new _vimeo_player__WEBPACK_IMPORTED_MODULE_0__["default"]('course-player', options);
     player.on('ended', function () {
       {
-        window.location = _this.nextVideoUrl;
+        window.location = _this.nextEpisodeUrl;
       }
     });
   }
@@ -80679,14 +80676,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.videos, function(video, index) {
+    _vm._l(_vm.episodes, function(episode, index) {
       return _c(
         "a",
         {
           key: index,
           staticClass: "text-decoration-none",
           staticStyle: { color: "black" },
-          attrs: { href: video.url }
+          attrs: { href: episode.url }
         },
         [
           _c(
@@ -80704,7 +80701,7 @@ var render = function() {
                       _c("b-button", [
                         _vm._v(
                           "\n                        " +
-                            _vm._s(video.episode_number) +
+                            _vm._s(episode.episode_number) +
                             "\n                    "
                         )
                       ])
@@ -80718,13 +80715,13 @@ var render = function() {
                     [
                       _c(
                         "b-card-body",
-                        { attrs: { title: video.title } },
+                        { attrs: { title: episode.title } },
                         [
                           _c("b-card-text", [
                             _vm._v(
                               "\n                            " +
                                 _vm._s(
-                                  video.description.substring(0, 200) + "..."
+                                  episode.description.substring(0, 200) + "..."
                                 ) +
                                 "\n                        "
                             )

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Courses;
+use App\Course;
 use Illuminate\Http\Request;
 
-class CoursesController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Courses::paginate(10);
+        $courses = Course::paginate(10);
         return view('courses.index', compact('courses'));
     }
 
@@ -42,10 +42,10 @@ class CoursesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Courses $course)
+    public function show(Course $course)
     {
         return view('courses.course.show', compact('course'));
     }
@@ -53,10 +53,10 @@ class CoursesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Courses $courses)
+    public function edit(Course $course)
     {
         //
     }
@@ -65,10 +65,10 @@ class CoursesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Courses  $courses
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Courses $courses)
+    public function update(Request $request, Course $course)
     {
         //
     }
@@ -76,10 +76,10 @@ class CoursesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Courses $course)
+    public function destroy(Course $course)
     {
         //
     }
@@ -87,15 +87,16 @@ class CoursesController extends Controller
     /**
      * Display an episode of this course
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\Course  $course
+     * @param  String  $episodeNumber
      * @return \Illuminate\Http\Response
      */
-    public function episode(Courses $course, $episodeNumber)
+    public function episode(Course $course, $episodeNumber)
     {
-        $video = $course->videos()->where('episode_number', $episodeNumber)->first();
+        $episode = $course->episodes()->where('episode_number', $episodeNumber)->first();
 
-        $nextVideo = $course->videos()->where('episode_number', $episodeNumber+1)->first();
-        $nextVideoUrl = $nextVideo->url ?? null;
+        $nextEpisode = $course->episodes()->where('episode_number', $episodeNumber+1)->first();
+        $nextEpisodeUrl = $nextEpisode->url ?? null;
 
         $breadCrumbs = [
             [
@@ -107,11 +108,11 @@ class CoursesController extends Controller
                 'href' => route('course.show', $course)
             ],
             [
-                'text' => $video->title,
+                'text' => $episode->title,
                 'active' => true
             ]
         ];
 
-        return view('courses.course.episode', compact('course', 'video', 'nextVideoUrl', 'breadCrumbs'));
+        return view('courses.course.episode.show', compact('course', 'episode', 'nextEpisodeUrl', 'breadCrumbs'));
     }
 }

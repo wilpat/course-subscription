@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVideosTable extends Migration
+class CreateEpisodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('episodes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description');
-            $table->string('vimeo_video_id');
+            $table->string('vimeo_video_id')->nullable();
             $table->unsignedInteger('episode_number');
             $table->unsignedBigInteger('course_id');
             $table->timestamps();
@@ -33,6 +33,6 @@ class CreateVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('episodes');
     }
 }
