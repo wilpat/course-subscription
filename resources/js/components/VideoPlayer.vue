@@ -11,7 +11,8 @@ export default {
         video: {
             type: Object,
             description: 'The video of an episode'
-        }
+        },
+        nextVideoUrl: String
     },
     mounted() {
         const options = {
@@ -19,6 +20,9 @@ export default {
         };
 
         var player = new Player('course-player', options);
+        player.on('ended', () =>{{
+            window.location = this.nextVideoUrl;
+        }})
     }
 }
 </script>

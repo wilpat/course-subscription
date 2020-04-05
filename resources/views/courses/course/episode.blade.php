@@ -3,8 +3,9 @@
 @section('content')
     <b-container>
         <section>
-            <h1>Video player</h1>
-            <video-player :video="{{$video}}"></video-player>
+        <h1>Video player</h1>
+        <b-breadcrumb :items="{{json_encode($breadCrumbs)}}"></b-breadcrumb>
+        <video-player :next-video-url=`{{$nextVideoUrl}}` :video="{{$video}}" ></video-player>
         </section>
         <section class="mb-5 pt-5 text-center">
             <a href="#" class="text-decoration-none" style="color:black">

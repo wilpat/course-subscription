@@ -93,6 +93,25 @@ class CoursesController extends Controller
     public function episode(Courses $course, $episodeNumber)
     {
         $video = $course->videos()->where('episode_number', $episodeNumber)->first();
-        return view('courses.course.episode', compact('course', 'video'));
+
+        $nextVideo = $course->videos()->where('episode_number', $episodeNumber+1)->first();
+        $nextVideoUrl = $nextVideo->url ?? null;
+
+        $breadCrumbs = [
+            [
+                'text' => 'Browse',
+                'href' => route('courses.index')
+            ],
+            [
+                'text' => $course->title,
+                'href' => route('course.show', $course)
+            ],
+            [
+                'text' => $video->title,
+                'active' => true
+            ]
+        ];
+
+        return view('courses.course.episode', compact('course', 'video', 'nextVideoUrl', 'breadCrumbs'));
     }
 }

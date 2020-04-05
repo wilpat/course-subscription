@@ -4202,13 +4202,21 @@ __webpack_require__.r(__webpack_exports__);
     video: {
       type: Object,
       description: 'The video of an episode'
-    }
+    },
+    nextVideoUrl: String
   },
   mounted: function mounted() {
+    var _this = this;
+
     var options = {
       id: this.video.vimeo_video_id
     };
     var player = new _vimeo_player__WEBPACK_IMPORTED_MODULE_0__["default"]('course-player', options);
+    player.on('ended', function () {
+      {
+        window.location = _this.nextVideoUrl;
+      }
+    });
   }
 });
 

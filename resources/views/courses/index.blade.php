@@ -13,7 +13,7 @@
                                     {{ \Str::words($course->description, 10) }}
                                 </b-card-text>
                                 <template v-slot:footer>
-                                    <b-button href="{{ route('courses.show', $course) }}" variant="primary">
+                                    <b-button href="{{ route('course.show', $course) }}" variant="primary">
                                         Play
                                     </b-button>
                                 </template>
