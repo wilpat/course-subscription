@@ -5,7 +5,7 @@
         <section>
             <b-jumbotron>
                 <template v-slot:header> {{$course->title}} </template>
-                <template v-slot:lead> {{$course->description}} </template>
+                <template v-slot:lead> {!!$course->description!!} </template>
 
                 <hr class="my-4">
 

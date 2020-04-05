@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -14,7 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::paginate(10);
+        $courses = Course::latest()->paginate(10);
         return view('courses.index', compact('courses'));
     }
 
