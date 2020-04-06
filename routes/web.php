@@ -29,3 +29,6 @@ Route::get('/course/{course}/episodes/{episodeNumber}','CourseController@episode
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('payment', 'PaymentController@show')->name('payment.show'); 
+Route::post('subscribe', 'PaymentController@subscribe')->name('payment.subscribe'); 
