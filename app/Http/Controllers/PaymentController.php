@@ -14,9 +14,9 @@ class PaymentController extends Controller
     {
 
         $plans = [
-            'prod_H2tkSGz7Iw2fDy' => 'Monthly',
+            'plan_H2tqbgFqjIAwmg' => 'Monthly',
             'plan_H2tttagMtIv0yY' => '6 Months',
-            'plan_H2tqbgFqjIAwmg' => 'Yearly'
+            'plan_H2ttfCrzIqTIiH' => 'Yearly'
         ];
 
         $data = [
@@ -35,6 +35,9 @@ class PaymentController extends Controller
 
         auth()->user()->newSubscription('main', $subscriptionPlan)->create($paymentMethod);
 
-        return response(['status'=>'success']);
+        return response([
+            'success_url'=> redirect()->intended('/')->getTargetUrl(),
+            'message' => 'success'
+        ]);
     }
-}
+} 

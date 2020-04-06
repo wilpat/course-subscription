@@ -71,7 +71,7 @@
             cardButton.addEventListener('click', async (e) => {
                 const plan = document.getElementById('subscription-plan').value;
                 cardButton.innerHTML = 'Please wait...';
-                cardButton.setAttribute('disabled', 'true');
+                cardButton.disabled = true
                 const { setupIntent, error } = await stripe.confirmCardSetup(
                     clientSecret, {
                         payment_method: {
@@ -83,7 +83,7 @@
 
                 if (error) {
                     cardButton.innerHTML = 'Error!';
-                    cardButton.setAttribute('disabled', 'false');
+                    cardButton.disabled = false
                     console.log("Error: ", error);
                 } else {
                     // The card has been verified successfully...
@@ -92,9 +92,15 @@
                         payment_method: setupIntent.payment_method,
                         plan
                     }).then(res => {
-                        console.log("success: ", setupIntent.payment_method);
+
+                        console.log("success: ", res);
                         cardButton.innerHTML = 'Success!';
-                    }).catch(err=>console.error)
+                        window.location = res.data.success_url
+                    }).catch(error=>{
+                        cardButton.innerHTML = 'Error!';
+                        cardButton.disabled = false
+                        console.log("Error: ", error);
+                    })
                 }
             });
         })

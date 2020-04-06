@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/courses', 'CourseController@index')->name('courses.index');
 Route::get('/course/{course}', 'CourseController@show')->name('course.show');
-Route::get('/course/{course}/episodes/{episodeNumber}','CourseController@episode')->name('course.episode');
+Route::get('/course/{course}/episodes/{episodeNumber}','CourseController@episode')->name('course.episode')->middleware('auth','subscribed');
 
 
 Route::group(['prefix' => 'admin'], function () {
