@@ -21,9 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/courses', 'CourseController@index')->name('courses.index');
 Route::get('/course/{course}', 'CourseController@show')->name('course.show');
-Route::get('/course/{course}/episodes/{episodeNumber}','CourseController@episode')->name('course.episode')->middleware('auth','subscribed');
+Route::get('/course/{course}/episodes/{episodeNumber}','CourseController@episode')->name('course.episode')->middleware(['auth','subscribed']);
 
 
 Route::group(['prefix' => 'admin'], function () {
@@ -32,3 +33,6 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('payment', 'PaymentController@show')->name('payment.show'); 
 Route::post('subscribe', 'PaymentController@subscribe')->name('payment.subscribe'); 
+
+Route::get('/social-auth/{provider}', 'Auth/LoginController@redirectToProvider')->name('socialite-login.redirect');
+Route::get('/social-auth/{provider}/callback', 'Auth/LoginController@handleCallback')->name('socialite-login.callback');

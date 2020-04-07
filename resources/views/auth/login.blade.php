@@ -56,6 +56,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                
+                                or
+                                <a href="{{route('socialite-login.redirect', 'github')}}" class="btn btn-secondary">Login with GitHub</a>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
